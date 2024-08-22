@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Collection from "./pages/Collection";
+import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import Orders from "./pages/Orders";
+import PlaceOrder from "./pages/PlaceOrder";
+import Product from "./pages/Product";
+import NavBar from "./components/NavBar";
+import Search from "./components/Search";
+import { useState } from "react";
+import Contact from "./pages/Contact";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  const[showSearch, setShowSearch] = useState(false);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className=" px-4  sm:px-[5vw] md:px-[7vw] lg:px-[9vW]" >
+       <NavBar showSearch ={showSearch} setShowSearch={setShowSearch}/>
+        {showSearch && <Search setShowSearch={setShowSearch}/>}
+      <Routes>
+        <Route  path="/" element={<Home/>} />
+        <Route  path="/about" element={<About/>} /> 
+        <Route  path="/collection" element={<Collection/>} />
+        <Route  path="/cart" element={<Cart/>} />
+        <Route  path="/login" element={<Login/>} />
+        <Route  path="/orders" element={<Orders/>} />
+        <Route  path="/products/:productId" element={<Product/>} />
+        <Route  path="/place-order" element={<PlaceOrder/>} />
+        <Route  path="/contact" element={<Contact/>} />
+
+
+
+
+      </Routes>
+
+    </div>
   )
 }
-
-export default App
